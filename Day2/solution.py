@@ -48,10 +48,12 @@ class Game:
 
 if __name__ == '__main__':
     TEST_INPUT_PATH = Path(__file__).resolve().parent.joinpath('test_input.txt')
-    TEST_ANSWER = 8
+    TEST_IDS_SUM = 8
+    TEST_POWERS_SUM = 2286
     INPUT_PATH = Path(__file__).resolve().parent.joinpath('input.txt')
 
     sum_of_ids = 0
+    sum_of_powers = 0
 
     ids = []
 
@@ -59,11 +61,15 @@ if __name__ == '__main__':
         for game_input in input_file:
             new_game = Game(game_input)
             new_game.count_cubes()
+            game_power = new_game.red_count * new_game.green_count * new_game.blue_count
+            # print(f'Game {new_game.game_number} power: {game_power}')
+            sum_of_powers += game_power
             if new_game.is_valid():
                 ids.append(new_game.game_number)
                 sum_of_ids += new_game.game_number
 
-    # assert sum_of_ids == TEST_ANSWER, f'{sum_of_ids} is not {TEST_ANSWER}'
+    # assert sum_of_ids == TEST_IDS_SUM, f'{sum_of_ids} is not {TEST_IDS_SUM}'
+    # assert sum_of_powers == TEST_POWERS_SUM, f'{sum_of_powers} is not {TEST_POWERS_SUM}'
 
     print(sum_of_ids)
-    print(ids)
+    print(sum_of_powers)
