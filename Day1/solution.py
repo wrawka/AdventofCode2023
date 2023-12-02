@@ -2,7 +2,9 @@ from pathlib import Path
 
 DIGITS = '0123456789'
 
-WORDY_DIGITS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+WORDY_DIGITS = ['one', 'two', 'three', 'four',
+                'five', 'six', 'seven', 'eight', 'nine']
+
 
 def extract_numbers(input: str) -> list[int]:
     """Extracts all numbers from `input` and returns them inside a list (in order)."""
@@ -26,10 +28,10 @@ def get_line_value(input: str) -> int:
 
 def extract_tricky_numbers(input: str) -> dict[int: str]:
     """
-    Extract digits and word-y digits from `input` and returns them inside a map, 
+    Extract digits and word-y digits from `input` and returns them inside a map,
     where key is item index in the `input` sequence.
     """
-    
+
     collected_numbers = dict()
 
     for idx, simbol in enumerate(input):
@@ -39,11 +41,12 @@ def extract_tricky_numbers(input: str) -> dict[int: str]:
         idx = input.find(wordy_digit)
         offset = 0
         while idx != -1:
-            collected_numbers.update({idx + offset: str(WORDY_DIGITS.index(wordy_digit) + 1)})
+            collected_numbers.update(
+                {idx + offset: str(WORDY_DIGITS.index(wordy_digit) + 1)})
             offset += idx + len(wordy_digit)
             input_slice = input[offset:]
             idx = input_slice.find(wordy_digit)
-    
+
     return collected_numbers
 
 
